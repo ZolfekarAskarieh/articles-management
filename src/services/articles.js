@@ -6,7 +6,7 @@ export function getArticle(articleID) {
 export function addArticle(article) {
     const response = {success: true};
 
-    const latestArticleID = parseInt(localStorage.getItem("latest_article_id", 0));
+    const latestArticleID = parseInt(localStorage.getItem("latest_article_id", 0) || 0);
     const articles = JSON.parse(localStorage.getItem("articles")) || [];
 
     article.id = latestArticleID + 1;

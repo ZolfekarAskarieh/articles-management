@@ -2,7 +2,7 @@ import md5 from 'md5';
 
 export function signUpUser(user) {
     const response = {success: false, payload: {}};
-    const latestID = parseInt(localStorage.getItem("latest_id", 0));
+    const latestID = parseInt(localStorage.getItem("latest_id", 0) || 0) ;
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const res = users.find((item) => {return user.email === item.email});
     if(!res) {

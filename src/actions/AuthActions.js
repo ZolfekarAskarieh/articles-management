@@ -21,9 +21,9 @@ export const signinUserAction = (user, history) => (dispatch) => {
 
     const res = signinUser(user);
     if(res.success) {
-        dispatch({ type: LOGIN_USER_SUCCESS, payload: res.payload });
         history.push('/dashboard');
         NotificationManager.success('User Login Successfully!');
+        dispatch({ type: LOGIN_USER_SUCCESS, payload: res.payload });
     } else {
         dispatch({ type: LOGIN_USER_FAILURE });
         NotificationManager.error('Wrong Username/Password');
