@@ -1,12 +1,12 @@
 export function getArticle(articleID) {
     const articles = JSON.parse(localStorage.getItem("articles")) || [];
-    return articles.find(item => item.id===articleID);
+    return articles.find(item => item.id==articleID);
 }
 
 export function addArticle(article) {
     const response = {success: true};
 
-    const latestArticleID = localStorage.getItem("latest_article_id", 0);
+    const latestArticleID = parseInt(localStorage.getItem("latest_article_id", 0));
     const articles = JSON.parse(localStorage.getItem("articles")) || [];
 
     article.id = latestArticleID + 1;
@@ -26,7 +26,7 @@ export function editArticle(article) {
     let articles = JSON.parse(localStorage.getItem("articles")) || [];
 
     articles = articles.map(item => {
-        if(item.id === article.id) {
+        if(item.id == article.id) {
             item = article;
             response.success = true;
         }
@@ -44,7 +44,7 @@ export function deleteArticle(article) {
 
     let articles = JSON.parse(localStorage.getItem("articles")) || [];
 
-    articles = articles.filter(item => item.id !== article.id);
+    articles = articles.filter(item => item.id != article.id);
 
     localStorage.setItem("articles", JSON.stringify(articles));
 
