@@ -26,6 +26,16 @@ const AsyncArticlesEdit = Loadable({
 	loading: () => <RctPageLoader />,
 });
 
+
+const AsyncSiteArticles = Loadable({
+	loader: () => import("../../app/frontend/routes/Articles"),
+	loading: () => <RctPageLoader />,
+});
+const AsyncSiteArticleDetails = Loadable({
+	loader: () => import("../../app/frontend/routes/ArticleDetails"),
+	loading: () => <RctPageLoader />,
+});
+
 // Error 404 component
 const AsyncError404 = Loadable({
 	loader: () => import("../Error404"),
@@ -37,5 +47,7 @@ export {
 	AsyncArticlesList,
 	AsyncArticlesCreate,
 	AsyncArticlesEdit,
+	AsyncSiteArticles,
+	AsyncSiteArticleDetails,
 	AsyncError404
 };
