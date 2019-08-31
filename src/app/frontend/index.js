@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {AsyncError404, AsyncSiteArticles, AsyncSiteArticleDetails} from '../../components/AsyncComponent';
 import { AppBar, Toolbar, Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
     icon: {
@@ -58,7 +59,7 @@ const styles = theme => ({
 });
 class Frontend extends Component {
     render() {
-        const { match, classes } = this.props;
+        const { match, classes, user } = this.props;
         return (
             <React.Fragment>
                 <CssBaseline />
@@ -67,9 +68,15 @@ class Frontend extends Component {
                         <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
                             Zol
                         </Typography>
-                        <Button color="primary" variant="outlined" className={classes.link} component={Link} to={"/signin"}>
-                            Login
-                        </Button>
+                        {!user?(
+                          <Button color="primary" variant="outlined" className={classes.link} component={Link} to={"/signin"}>
+                              Login
+                          </Button>
+                        ):(
+                          <Button color="primary" variant="outlined" className={classes.link} component={Link} to={"/dashboard"}>
+                              Dashboard
+                          </Button>
+                        )}
                     </Toolbar>
                 </AppBar>
                 <Switch>
@@ -94,5 +101,8 @@ class Frontend extends Component {
         )
     }
 }
-
-export default withStyles(styles)(Frontend);
+const mapStateToProps = ({authUser}) => {
+  const { user } = authUser;
+	return { user };
+}
+export default withStyles(styles)(connect(mapStateToProps)(Frontend));
